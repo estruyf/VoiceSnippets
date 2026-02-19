@@ -70,6 +70,12 @@ VoiceSnippets allows you to configure custom voice commands to perform various a
 
 ## Features
 
+### Command Packs
+
+<div align="center">
+  <img width="600" alt="Command Packs" src="./assets/packs.png" />
+</div>
+
 ### Analytics
 
 <div align="center">
