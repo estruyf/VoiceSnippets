@@ -107,6 +107,7 @@ Under the **about** tab, you can find the log and application directory.
 
 <div align="center">
   <img width="600" alt="Log and application folder" src="https://github.com/user-attachments/assets/ad21e8aa-a66e-46ea-8bc8-4a3d5f13d5d4" />
+</div>
 
 ### Logs
 
