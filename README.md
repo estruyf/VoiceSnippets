@@ -15,12 +15,18 @@ A cross-platform desktop application that uses voice commands to expand text sni
 
 VoiceSnippets is a powerful voice-activated productivity tool that allows you to:
 
-- **Expand text snippets** using voice commands
-- **Execute keyboard shortcuts** hands-free
-- **Run custom workflows** with simple voice triggers
-- **Command packs** that you can easily import to get started quickly
-- **Import and export** your voice commands for easy backup and sharing
-- **Cross-platform support** for seamless productivity across devices (*WIP*)
+- **Text Expansion**: Map trigger words to text snippets (e.g., say "email" → expands to your email)
+- **Keyboard Shortcuts**: Execute keyboard shortcuts by voice hands-free (e.g., say "save" → Cmd+S)
+- **Workflows**: Chain multiple actions—type text, press keys, add delays to automate complex tasks
+- **Command Aliases**: Define multiple trigger phrases for a single command
+- **Command Chaining**: Trigger multiple commands in a single breath using conjunctions like "and", "then", or "and then"
+- **App-Aware Commands**: Specify which commands apply to which apps for context-specific actions
+- **Custom Word Remapping**: Correct commonly misheard words during transcription
+- **Cloud Sync**: Sync commands to GitHub Gist for backup and cross-device synchronization
+- **Command Packs**: Pre-built packs for common tools to get started quickly
+- **Voice Activity Detection**: Automatically stops recording when silence is detected
+- **Menu Bar Integration**: Minimalist design—lives in your menu bar, out of the way
+- **Analytics**: Track your command usage statistics (local only, no data sent anywhere)
 
 Simply speak your trigger word, and **VoiceSnippets** instantly performs your configured action. Whether it's inserting a code snippet, executing a shortcut, or automating a complex workflow.
 
@@ -32,17 +38,24 @@ Simply speak your trigger word, and **VoiceSnippets** instantly performs your co
 - **Press the global hotkey** (default: `⌥+S`) to start listening.
 - **Speak your trigger word** and watch as VoiceSnippets performs the configured action!
 
-## Examples of Voice Commands
+You can customize the hotkey in Settings.
 
-VoiceSnippets allows you to configure custom voice commands to perform various actions like inserting text snippets, executing keyboard shortcuts, or running complex workflows. Here are some examples of what you can do with VoiceSnippets:
+## Command Types
 
-### Text expansion
+### Text Expansion
 
+Say a trigger word to expand it into text:
+
+- Trigger: `"email"` → Expansion: `"user@example.com"`
 - Say `Insert greeting` to expand a text snippet like "Hello, how are you?"
 - Say `pull` to expand a text snippet like `git pull` in your terminal.
 
-## Keyboard shortcuts
+### Keyboard Shortcuts
 
+Execute a keyboard shortcut by voice:
+
+- Trigger: `"save"` → Expansion: `"Cmd+S"`
+- Say `copy` to execute the `Cmd + C` (or `Ctrl + C`) keyboard shortcut to copy selected text.
 - Say `Enter` to execute the `Enter` keyboard shortcut hands-free.
 
 <div align="center">
@@ -51,26 +64,44 @@ VoiceSnippets allows you to configure custom voice commands to perform various a
 
 > Once you start using it, you become lazy to type on your keyboard.
 
-- Say `copy` to execute the `Cmd + C` (or `Ctrl + C`) keyboard shortcut to copy selected text.
+### Workflows
 
-## Workflows
+Chain multiple actions—type text, press keys, add delays:
 
-- Say `app development` to run a workflow that expands text like `npm run tauri dev` and presses `Enter` to execute it in the terminal.
+- Trigger: `"app development"` → Steps: `npm run tauri dev` → Enter
+- Trigger: `"commit changes {message}"` → Steps: `git add .` → Enter → `git commit -m "{message}"` → Enter
+- Say `open demo time` to run a multistep workflow that opens the Visual Studio Code project via Raycast
 
 <div align="center">
   <img width="600" alt="Simple workflow" src="./assets/workflow.png" />
 </div>
 
-
-- Say `open demo time` to run a multistep workflow that opens the Visual Studio Code project via Raycast
-
 <div align="center">
   <img width="600" alt="Advanced workflow" src="./assets/multistep-workflow.png" />
 </div>
 
+## Command Chaining
+
+Trigger multiple commands in a single breath by using conjunctions like **"and"**, **"then"**, or **"and then"** between commands.
+
+- Say `"clear terminal and dev"` → runs the "clear terminal" command, then the "dev" command
+- Say `"new file then save"` → runs the "new file" command, then the "save" command
+- Say `"copy and then paste"` → runs the "copy" command, then the "paste" command
+
+> Chaining only activates when **all** segments match a known command. If any part doesn't match, the full transcription is treated as a single command instead. You can enable or disable this feature in **Settings → Preferences → Command Chaining**.
+
 ## Features
 
 ### Command Packs
+
+Pre-built packs for common tools to get you started quickly:
+
+- **Git**: Common git commands (status, pull, push, commit, etc.)
+- **npm**: Node.js scripts (dev, build, test, start, lint)
+- **Git Workflows**: Multi-step git workflows
+- **macOS Shortcuts**: Common system shortcuts
+
+Install/uninstall packs from the Packs tab. Commands are tagged with the pack name for easy management.
 
 <div align="center">
   <img width="600" alt="Command Packs" src="./assets/packs.png" />
@@ -78,11 +109,18 @@ VoiceSnippets allows you to configure custom voice commands to perform various a
 
 ### Analytics
 
+Track your command usage statistics directly in the app. Perfect for understanding which voice commands you use most.
+
 <div align="center">
   <img width="600" alt="Usage analytics" src="./assets/analytics.png" />
 </div>
 
-> This feature is only local, no data is sent to any server.
+> This feature is only local—no data is sent to any server. Your usage statistics stay completely private.
+
+## Platform Support
+
+- **macOS**: Full support (Metal acceleration, menu bar, accessibility permissions)
+- **Windows**: Full support (Vulkan acceleration, code signing)
 
 ## Releases
 
