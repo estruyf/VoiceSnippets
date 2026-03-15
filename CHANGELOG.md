@@ -2,8 +2,8 @@
 
 ## [0.7.1]
 
-- fix: implement Windows text expansion by copying matched text to the clipboard and triggering Ctrl+V key input
-- fix: apply the same Windows paste path to workflow text steps so workflow typing works consistently across command types
+- [#11](https://github.com/estruyf/VoiceSnippets/issues/11) fix: implement Windows text expansion by copying matched text to the clipboard and triggering Ctrl+V key input
+- [#11](https://github.com/estruyf/VoiceSnippets/issues/11) fix: apply the same Windows paste path to workflow text steps so workflow typing works consistently across command types
 
 ## [0.7.0]
 
