@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.7.1]
+
+- fix: implement Windows text expansion by copying matched text to the clipboard and triggering Ctrl+V key input
+- fix: apply the same Windows paste path to workflow text steps so workflow typing works consistently across command types
+
 ## [0.7.0]
 
 - feat: app-aware command matching supports, you can now specify which commands apply to which apps using bundle IDs (macOS) or app names (Windows)

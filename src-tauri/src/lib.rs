@@ -692,10 +692,10 @@ fn execute_matched_command(app: &tauri::AppHandle, m: &crate::matcher::MatchResu
             execute_shortcut(expansion);
         }
         crate::snippets::CommandType::TextExpansion => {
-            paste_text(expansion);
+            paste_text(app, expansion);
         }
         crate::snippets::CommandType::Workflow => {
-            execute_workflow(&m.command);
+            execute_workflow(app, &m.command);
         }
         crate::snippets::CommandType::OpenApp => {
             open_application(expansion);
@@ -713,7 +713,7 @@ fn emit_no_match(app: &tauri::AppHandle, text: &str) -> bool {
     true
 }
 
-fn paste_text(_text: &str) {
+fn paste_text(_app: &tauri::AppHandle, _text: &str) {
     #[cfg(target_os = "macos")]
     {
         use std::process::Command;
@@ -744,6 +744,47 @@ fn paste_text(_text: &str) {
                 "tell application \"System Events\" to keystroke \"v\" using command down",
             ])
             .output();
+    }
+
+    #[cfg(target_os = "windows")]
+    {
+        use enigo::{Direction, Enigo, Key, Keyboard, Settings};
+        use tauri_plugin_clipboard_manager::ClipboardExt;
+
+        let clipboard = _app.clipboard();
+        let previous_clipboard = clipboard.read_text().unwrap_or_default();
+
+        if let Err(e) = clipboard.write_text(_text) {
+            log::error!("Failed to write text to clipboard: {}", e);
+            return;
+        }
+
+        std::thread::sleep(std::time::Duration::from_millis(50));
+
+        let mut enigo = match Enigo::new(&Settings::default()) {
+            Ok(enigo) => enigo,
+            Err(e) => {
+                log::error!("Failed to initialize Enigo for paste: {}", e);
+                return;
+            }
+        };
+
+        if let Err(e) = enigo.key(Key::Control, Direction::Press) {
+            log::error!("Failed to press Control key: {}", e);
+            return;
+        }
+        if let Err(e) = enigo.key(Key::Other(0x56), Direction::Click) {
+            log::error!("Failed to send V key: {}", e);
+            let _ = enigo.key(Key::Control, Direction::Release);
+            return;
+        }
+        std::thread::sleep(std::time::Duration::from_millis(50));
+        if let Err(e) = enigo.key(Key::Control, Direction::Release) {
+            log::error!("Failed to release Control key: {}", e);
+            return;
+        }
+
+        let _ = clipboard.write_text(previous_clipboard);
     }
 }
 
@@ -831,7 +872,7 @@ fn execute_shortcut(_shortcut: &str) {
 }
 
 /// Execute a workflow: a sequence of text expansions, key presses, and delays.
-fn execute_workflow(command: &crate::snippets::VoiceCommand) {
+fn execute_workflow(app: &tauri::AppHandle, command: &crate::snippets::VoiceCommand) {
     let steps = match &command.workflow_steps {
         Some(steps) if !steps.is_empty() => steps.clone(),
         _ => {
@@ -857,7 +898,7 @@ fn execute_workflow(command: &crate::snippets::VoiceCommand) {
 
         match step.step_type.as_str() {
             "text" => {
-                paste_text(&step.value);
+                paste_text(app, &step.value);
                 // Small delay after pasting to let the OS process it
                 std::thread::sleep(std::time::Duration::from_millis(100));
             }
