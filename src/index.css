@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/* 
+  Define CSS variables for the theme. 
+  These are the same as in globals.css 
+*/
+@layer base {
+  :root {
+    --background: 240 8% 7%;
+    --foreground: 240 5% 92%;
+    --card: 240 8% 10%;
+    --card-foreground: 240 5% 92%;
+    --popover: 240 8% 10%;
+    --popover-foreground: 240 5% 92%;
+    --primary: 265 85% 68%;
+    --primary-foreground: 240 8% 7%;
+    --secondary: 240 6% 12%;
+    --secondary-foreground: 240 5% 92%;
+    --muted: 240 6% 16%;
+    --muted-foreground: 240 5% 64%;
+    --accent: 240 6% 18%;
+    --accent-foreground: 240 5% 88%;
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 6% 20%;
+    --input: 240 6% 20%;
+    --ring: 265 85% 68%;
+    --chart-1: 265 80% 60%;
+    --chart-2: 280 75% 65%;
+    --chart-3: 250 70% 55%;
+    --chart-4: 240 65% 60%;
+    --chart-5: 300 70% 60%;
+    --radius: 0.5rem;
+    --success: 142 70% 50%;
+    --success-foreground: 0 0% 100%;
+    --sidebar-background: 240 6% 12%;
+    --sidebar-foreground: 240 5% 64%;
+    --sidebar-primary: 265 85% 68%;
+    --sidebar-primary-foreground: 240 8% 7%;
+    --sidebar-accent: 265 80% 70%;
+    --sidebar-accent-foreground: 240 8% 7%;
+    --sidebar-border: 240 6% 20%;
+    --sidebar-ring: 265 85% 68%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
+  @import "overlayscrollbars/overlayscrollbars.css";
+
+  .os-theme-custom.os-scrollbar {
+    --os-size: 8px;
+    --os-padding-perpendicular: 0px;
+    --os-padding-axis: 0px;
+  }
+
+  .os-theme-custom.os-scrollbar .os-scrollbar-track {
+    background: rgba(167, 139, 250, 0.2);
+    border-radius: 4px;
+  }
+
+  .os-theme-custom.os-scrollbar .os-scrollbar-handle {
+    background: rgba(167, 139, 250, 0.4);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  .os-theme-custom.os-scrollbar .os-scrollbar-handle:hover {
+    background: rgba(167, 139, 250, 0.7);
+  }
+}

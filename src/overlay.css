@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+}
+
+@layer base {
+  :root {
+    --background: 240 8% 7%;
+    --foreground: 240 5% 92%;
+    --card: 240 8% 10%;
+    --card-foreground: 240 5% 92%;
+    --border: 240 6% 20%;
+    --primary: 265 85% 68%;
+    --muted-foreground: 240 5% 64%;
+  }
+}
+
+html,
+body {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "VoiceSnippets",
+  "version": "0.7.0",
+  "identifier": "com.eliostruyf.voicesnippets",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "settings",
+        "title": "VoiceSnippets",
+        "width": 920,
+        "height": 850,
+        "minWidth": 920,
+        "minHeight": 850,
+        "resizable": true,
+        "visible": false,
+        "center": true,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
+        "maximizable": false
+      },
+      {
+        "label": "overlay",
+        "url": "overlay.html",
+        "title": "",
+        "width": 280,
+        "height": 60,
+        "resizable": false,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "shadow": false
+      }
+    ],
+    "macOSPrivateApi": true,
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "dmg",
+      "app",
+      "msi",
+      "nsis",
+      "deb",
+      "appimage"
+    ],
+    "resources": [
+      "icons/32x32.png",
+      "icons/32x32_recording.png",
+      "icons/32x32_processing.png"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "files": {},
+      "hardenedRuntime": true,
+      "minimumSystemVersion": "10.13",
+      "signingIdentity": "Developer ID Application: Elio Struyf (9YX7DQ75N5)",
+      "entitlements": "Entitlements.plist"
+    }
+  },
+  "plugins": {}
+}
